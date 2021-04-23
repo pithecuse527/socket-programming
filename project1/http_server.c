@@ -21,6 +21,12 @@ char* parse_html(char *buff, int* obj_type);
 
 int main(int argc, char *argv[])
 {
+  // valid usage check
+  if (argc < 2){
+    fprintf(stderr, "usage: http_server [port_num]\n");
+    return 0;
+  }
+
   // HTTP header info.
   char html_header[] = "HTTP/1.1 200 Ok\r\nContent-Type: text/html\r\n\r\n";
   char gif_header[] = "HTTP/1.1 200 Ok\r\nContent-Type: image/gif\r\n\r\n";
@@ -117,7 +123,6 @@ char* parse_html(char *buff, int* obj_type)
 
   if (*runner == ' ' && obj_len == 0) { // quit right away with default html
     *obj_type = HTML_TYPE;
-    printf("here!!\n");
     strcpy(html_object, "index.html");
     return html_object;
   }
